@@ -5,8 +5,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
-
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name="mobiles")
 public class Mobiles {
@@ -14,48 +23,14 @@ public class Mobiles {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id;
-	
+
+	@NotNull(message = "mobile name not be null")
+	@Size(min = 4)
 	private String mobileName;
-	
+	@NotNull(message = "model not be empty")
+	@Size(min = 1)
 	private String model;
-	
-	private String price;
 
-	public Long getId() {
-		return Id;
-	}
-
-	public void setId(Long id) {
-		Id = id;
-	}
-
-	public String getMobileName() {
-		return mobileName;
-	}
-
-	public void setMobileName(String mobileName) {
-		this.mobileName = mobileName;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setProce(String proce) {
-		this.price = proce;
-	}
-
-	@Override
-	public String toString() {
-		return "httpMobiles [Id=" + Id + ", mobieName=" + mobileName + ", model=" + model + ", proce=" + price + "]";
-	}
-	
+	@NotNull(message = "price not be empty")
+	private Integer price;
 }
